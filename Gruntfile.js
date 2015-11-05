@@ -3,6 +3,14 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     concat: {
+      dist: {
+        src: [
+              'app/model/*.js',
+              'app/config.js'
+        ],
+        dest: 'public/minified/storage.js'
+        
+      }
     },
 
     mochaTest: {
@@ -21,20 +29,18 @@ module.exports = function(grunt) {
     },
     // FIXME
     uglify: {
-      options: {
-        mangle: true
-      },
-      my_target: {
+      
         files: {
-          'dest/output.min.js': ['src/input.js']
+          src: 'public/minified/storage.js',
+          dest: 'public/minified/storage.min.js'
         }
-      }
+      
     },
 
     jshint: {
       files: [
         // Add filespec list here
-        '**/*.js'
+        'public/minified/storage.min.js'
       ],
       options: {
         force: 'true',
@@ -46,21 +52,19 @@ module.exports = function(grunt) {
       }
     },
 
-    concat: {
-      src: [ '**/*.js' ],
-      dest: 'public/dist.js'
-    }
+    // concat: {
+    //   src: [ 'public/minified/storage.js' ],
+    //   dest: 'public/minified/storage.min.js'
+    // },
 
     cssmin: {
         // Add filespec list here
-        target: {
-          files: [{
-            src: ['**/*.css'],
-            dest: 'public/dist',
-            ext: '.min.css'
-          }]
+        // target: {
+        //   files: {
+        //     'public/dist': ['**/*.js'] 
+        //   }
           
-        }
+        // }
     },
 
     watch: {
@@ -119,6 +123,8 @@ module.exports = function(grunt) {
   grunt.registerTask('build', [
   ]);
 
+  grunt.registerTask('default', ['concat', 'uglify'])
+
   grunt.registerTask('upload', function(n) {
     if(grunt.option('prod')) {
       // add your production server task here
@@ -129,10 +135,10 @@ module.exports = function(grunt) {
 
   grunt.registerTask('deploy', [
       // add your production server task here
-      'jshint'
-      'cssmin'
-      'uglify',
-      'concat'
+      // 'jshint',
+      // 'cssmin',
+      // 'uglify',
+      // 'concat'
   ]);
 
 

@@ -19,13 +19,22 @@ module.exports = function(grunt) {
         script: 'server.js'
       }
     },
-
+    // FIXME
     uglify: {
+      options: {
+        mangle: true
+      },
+      my_target: {
+        files: {
+          'dest/output.min.js': ['src/input.js']
+        }
+      }
     },
 
     jshint: {
       files: [
         // Add filespec list here
+        '**/*.js'
       ],
       options: {
         force: 'true',
@@ -37,8 +46,21 @@ module.exports = function(grunt) {
       }
     },
 
+    concat: {
+      src: [ '**/*.js' ],
+      dest: 'public/dist.js'
+    }
+
     cssmin: {
         // Add filespec list here
+        target: {
+          files: [{
+            src: ['**/*.css'],
+            dest: 'public/dist',
+            ext: '.min.css'
+          }]
+          
+        }
     },
 
     watch: {
@@ -107,6 +129,10 @@ module.exports = function(grunt) {
 
   grunt.registerTask('deploy', [
       // add your production server task here
+      'jshint'
+      'cssmin'
+      'uglify',
+      'concat'
   ]);
 
 

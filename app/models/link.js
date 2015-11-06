@@ -30,10 +30,10 @@ var Link = mongoose.model('link', linkSchema);
 // });
 
 // pre is middleware that exeutes the function before save
-linkSchema.pre('save', function(model, attrs, options, next){
+linkSchema.pre('save', function(next){
   var shasum = crypto.createHash('sha1');
-  shasum.update(linkSchema.get('url'));
-  linkSchema.set('code', shasum.digest('hex').slice(0, 5));
+  shasum.update(this.url);
+  this.code = shasum.digest('hex').slice(0, 5);
   next();
 });
 

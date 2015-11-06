@@ -124,6 +124,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('test', [
     'jshint',
+    // add something that starts mongod server in terminal
     'mochaTest'
   ]);
 

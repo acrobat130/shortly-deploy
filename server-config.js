@@ -6,7 +6,9 @@ var handler = require('./lib/request-handler');
 
 var app = express();
 
-app.configure(function() {
+
+// app.configure(function() {
+//   if()
   app.set('views', __dirname + '/views');
   app.set('view engine', 'ejs');
   app.use(partials());
@@ -14,7 +16,7 @@ app.configure(function() {
   app.use(express.static(__dirname + '/public'));
   app.use(express.cookieParser('shhhh, very secret'));
   app.use(express.session());
-});
+// });
 
 app.get('/', util.checkUser, handler.renderIndex);
 app.get('/create', util.checkUser, handler.renderIndex);

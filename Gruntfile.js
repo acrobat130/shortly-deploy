@@ -40,7 +40,10 @@ module.exports = function(grunt) {
     jshint: {
       files: [
         // Add filespec list here
-        'public/minified/storage.min.js'
+        'app/**/*.js',
+        'lib/**/*.js',
+        'public/client/*.js',
+        './*.js'
       ],
       options: {
         force: 'true',
@@ -120,14 +123,15 @@ module.exports = function(grunt) {
   ////////////////////////////////////////////////////
 
   grunt.registerTask('test', [
+    'jshint',
     'mochaTest'
   ]);
 
   grunt.registerTask('build', [
-    // run shell file
+    'concat', 'uglify', 'cssmin'
   ]);
 
-  grunt.registerTask('default', ['jshint', 'concat', 'uglify', 'cssmin'])
+  // grunt.registerTask('default', [])
 
   grunt.registerTask('upload', function(n) {
     if(grunt.option('prod')) {
@@ -141,7 +145,6 @@ module.exports = function(grunt) {
   grunt.registerTask('deploy', [
       // add your production server task here
       'test',
-      'default',
       'build',
       'upload'
   ]);

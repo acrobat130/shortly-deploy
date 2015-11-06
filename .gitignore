@@ -10,6 +10,9 @@ Icon
 # ignore node_modules
 node_modules
 
+# ignore minified files
+public/minified
+
 # Floobits
 .floo
 .floobit

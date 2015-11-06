@@ -2,9 +2,16 @@ var db = require('../config');
 var bcrypt = require('bcrypt-nodejs');
 var Promise = require('bluebird');
 
-var User = db.Model.extend({
-  tableName: 'users',
-  hasTimestamps: true,
+// TODO: look into new mongoose.Schema vs mongoose.Schema
+var userSchema = mongoose.Schema({
+  username: String,
+  password: String
+});
+
+// uncomment this for bookshelf implementation
+// var User = db.Model.extend({
+//   tableName: 'users',
+//   hasTimestamps: true,
   initialize: function(){
     this.on('creating', this.hashPassword);
   },

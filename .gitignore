@@ -12,6 +12,7 @@ node_modules
 
 # ignore minified files
 public/minified
+public/minified/storage
 
 # Floobits
 .floo

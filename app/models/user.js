@@ -5,6 +5,7 @@ var mongoose = require('mongoose');
 
 // TODO: look into new mongoose.Schema vs mongoose.Schema
 var userSchema = mongoose.Schema({
+  // require that username is unique
   username: { type: String, index: {unique: true} },
   password: String
 });
